@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OleaDiet — Nutrition Scientifique & Calculateurs Biologiques</title>
+    <meta name="description" content="Découvrez OleaDiet, l'application mobile de nutrition avancée basée sur la base de données CIQUAL. Calculez vos indices de santé, évaluez la compatibilité de vos aliments avec vos régimes (Keto, FODMAP) et optimisez votre métabolisme.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons for premium visual design -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette OleaDiet - Thème Clair */
+            --primary: #6cb048;
+            --primary-dark: #548c3c;
+            --primary-light: #e8f5e3;
+            --accent: #dca014;
+            --accent-light: #fef8eb;
+            --bg-main: #f7faf4;
+            --bg-card: #ffffff;
+            --text-main: #13220c;
+            --text-muted: #4a5c43;
+            --border: #e2ebd9;
+            --shadow-sm: 0 2px 4px rgba(108, 176, 72, 0.05);
+            --shadow-md: 0 10px 25px rgba(108, 176, 72, 0.08);
+            --shadow-lg: 0 20px 40px rgba(108, 176, 72, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* Layout Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(247, 250, 244, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: #ffffff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .logo-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        nav a:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(108, 176, 72, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 176, 72, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: #dbeed4;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            background: radial-gradient(circle at 80% 20%, rgba(108, 176, 72, 0.08) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 54px;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .hero-badges {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .badge-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 8px;
+        }
+
+        /* Hero Mockup Frame */
+        .hero-mockup-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-mockup-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            background: radial-gradient(circle, rgba(108, 176, 72, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .mockup-container {
+            background-color: #ffffff;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 8px solid #1e293b;
+            max-width: 380px;
+            width: 100%;
+            transform: rotate(2deg);
+            transition: var(--transition);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .mockup-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .mockup-image {
+            width: 100%;
+            height: auto;
+            border-radius: 28px;
+            display: block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(2deg); }
+            50% { transform: translateY(-12px) rotate(1.5deg); }
+            100% { transform: translateY(0px) rotate(2deg); }
+        }
+
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 38px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-main);
+            border-radius: 24px;
+            padding: 36px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .feature-card .icon-box {
+            width: 56px;
+            height: 56px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Detail/Indices Section */
+        .indices-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg-main) 100%);
+        }
+
+        .indices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .indices-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .index-item-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .index-item-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: scale(1.03);
+        }
+
+        .index-item-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .index-item-card p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .indicator-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .pill-green { background-color: #d1fae5; color: #065f46; }
+        .pill-orange { background-color: #fef3c7; color: #92400e; }
+        .pill-red { background-color: #fee2e2; color: #991b1b; }
+        .pill-blue { background-color: #e0f2fe; color: #075985; }
+
+        /* Calculators Section */
+        .calculators-section {
+            padding: 100px 0;
+            background-color: #ffffff;
+        }
+
+        .calc-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .calc-cat-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .calc-cat-card:hover {
+            border-color: currentColor;
+            background-color: var(--bg-main);
+        }
+
+        .calc-cat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .calc-cat-card h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .calc-cat-card p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        /* Interactive Widget Section */
+        .widget-section {
+            padding: 100px 0;
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .widget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .widget-card {
+            background-color: #ffffff;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .widget-form-group {
+            margin-bottom: 24px;
+        }
+
+        .widget-form-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .widget-form-group label span {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .slider-control {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            outline: none;
+            border-radius: 10px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .slider-control::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--primary-dark);
+        }
+
+        .select-control {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            background-color: #ffffff;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .select-control:focus {
+            border-color: var(--primary);
+        }
+
+        .widget-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .result-box {
+            background-color: var(--bg-main);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .result-box h5 {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .result-unit {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .advice-box {
+            grid-column: span 2;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 14px;
+            color: #785808;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-content {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            color: #ffffff;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 36px;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background-color: #ffffff;
+            color: var(--primary-dark);
+        }
+
+        .btn-white:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-outline-white:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #13220c;
+            color: #d1e2cc;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #a3c29c;
+            max-width: 320px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            font-size: 14px;
+            color: #a3c29c;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #a3c29c;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .hero-grid, .indices-grid, .widget-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .hero-actions, .hero-badges {
+                justify-content: center;
+            }
+            .hero-mockup-wrapper {
+                order: -1;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .calc-categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 38px;
+            }
+            .features-grid, .calc-categories-grid {
+                grid-template-columns: 1fr;
+            }
+            .indices-visual {
+                grid-template-columns: 1fr;
+            }
+            .widget-results {
+                grid-template-columns: 1fr;
+            }
+            .advice-box {
+                grid-column: span 1;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-wrapper">
+            <div class="logo">
+                OleaDiet<span class="logo-dot"></span>
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Fonctionnalités</a>
+                <a href="#indices">Indices Clés</a>
+                <a href="#calculators">Calculateurs</a>
+                <a href="#demo">Démo Interactive</a>
+                <a href="./privacy_policy.html">Confidentialité</a>
+                <a href="#cta" class="btn btn-primary" id="btn-nav-download">Télécharger</a>
+            </nav>
+            <button class="menu-toggle" id="menu-btn" aria-label="Menu de navigation">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Votre santé biologique, <span>optimisée par la science</span></h1>
+                <p class="hero-subtitle">
+                    OleaDiet combine la rigueur de la base nutritionnelle officielle <strong>CIQUAL</strong> à des calculateurs biologiques avancés pour vous offrir une précision de santé inégalée.
+                </p>
+                <div class="hero-actions">
+                    <a href="#cta" class="btn btn-primary" id="btn-hero-dl">Télécharger l'application</a>
+                    <a href="#demo" class="btn btn-secondary" id="btn-hero-demo">Calculateur de démo</a>
+                </div>
+                <div class="hero-badges">
+                    <div class="badge-item">
+                        <div class="badge-icon"><i data-lucide="shield-check" style="width:16px;height:16px;"></i></div>
+                        <span>Sans approximation</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i data-lucide="globe" style="width:16px;height:16px;"></i></div>
+                        <span>Traduite en 5 langues</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon"><i data-lucide="database" style="width:16px;height:16px;"></i></div>
+                        <span>Isar Database Locale</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-mockup-wrapper">
+                <div class="mockup-container">
+                    <img src="./oleadiet_app_mockup.png" alt="OleaDiet App Interface Mockup" class="mockup-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Conçue pour la précision biologique</h2>
+                <p>OleaDiet élimine le hasard. Découvrez une suite d'outils analytiques pensée pour les exigences de votre santé.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="search"></i></div>
+                    <h3>Recherche CIQUAL Officielle</h3>
+                    <p>Recherchez parmi des milliers d'aliments et accédez instantanément à leur composition exacte en vitamines, minéraux et macronutriments, issue des données scientifiques de référence.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="sliders"></i></div>
+                    <h3>Compatibilité de Régimes</h3>
+                    <p>Votre profil configure des filtres stricts. L'application calcule les scores de compatibilité pour le régime Cétogène (Keto), Méditerranéen, Low-FODMAP et Cardio-vasculaire.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="activity"></i></div>
+                    <h3>6 Catégories de Calculateurs</h3>
+                    <p>Que vous cherchiez à optimiser vos électrolytes, calculer votre TDEE, votre rapport sodium-potassium ou votre score PRAL acido-basique, OleaDiet met à disposition des outils biologiques complets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specific Indices Section -->
+    <section class="indices-section" id="indices">
+        <div class="container indices-grid">
+            <div>
+                <h2 style="font-size: 36px; margin-bottom: 20px;">Des marqueurs de santé incontournables</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">
+                    Chaque aliment contient des données plus complexes que les simples calories. OleaDiet extrait et qualifie les marqueurs fondamentaux pour éclairer vos choix alimentaires.
+                </p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+                    <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Indice Glycémique (IG) & Glucides Nets
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Classification NOVA (Niveau de transformation)
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Indice PRAL (Équilibre acido-basique rénal)
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Densité Calorique (Kcal/g)
+                    </li>
+                </ul>
+            </div>
+            <div class="indices-visual">
+                <div class="index-item-card">
+                    <h4>Index Glycémique</h4>
+                    <p>Déterminez la vitesse à laquelle les glucides augmentent la glycémie sanguine.</p>
+                    <span class="indicator-pill pill-green">Bas (≤ 55)</span>
+                </div>
+                <div class="index-item-card">
+                    <h4>Groupe NOVA</h4>
+                    <p>Mesure le degré de transformation industrielle des ingrédients.</p>
+                    <span class="indicator-pill pill-blue">NOVA 1 (Non transformé)</span>
+                </div>
+                <div class="index-item-card">
+                    <h4>Indice PRAL</h4>
+                    <p>Estime la charge acide ou alcaline d'un aliment sur votre système rénal.</p>
+                    <span class="indicator-pill pill-orange">Alcalin (Score < 0)</span>
+                </div>
+                <div class="index-item-card">
+                    <h4>Densité Calorique</h4>
+                    <p>Rapport calories/poids. Privilégiez les faibles densités pour la satiété.</p>
+                    <span class="indicator-pill pill-red">Haute (≥ 4.0 kcal/g)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biological Calculators List Section -->
+    <section class="calculators-section" id="calculators">
+        <div class="container">
+            <div class="section-header">
+                <h2>Vos outils de biologie clinique et métabolique</h2>
+                <p>OleaDiet intègre plus de 30 calculateurs spécifiques répartis en grandes sphères fonctionnelles de la santé.</p>
+            </div>
+            <div class="calc-categories-grid">
+                <div class="calc-cat-card" style="color: #0d9488;">
+                    <div class="calc-cat-icon" style="background-color: #0d9488;"><i data-lucide="pie-chart"></i></div>
+                    <div>
+                        <h3>Keto & Nutrition</h3>
+                        <p>Macros cétogènes précises, ratios de lipides et seuils personnalisés de glucides nets.</p>
+                    </div>
+                </div>
+                <div class="calc-cat-card" style="color: #2563eb;">
+                    <div class="calc-cat-icon" style="background-color: #2563eb;"><i data-lucide="scale"></i></div>
+                    <div>
+                        <h3>Métabolisme & Poids</h3>
+                        <p>Estimation du métabolisme de base (BMR), dépenses totales (TDEE) et déficits optimisés.</p>
+                    </div>
+                </div>
+                <div class="calc-cat-card" style="color: #dc2626;">
+                    <div class="calc-cat-icon" style="background-color: #dc2626;"><i data-lucide="heart"></i></div>
+                    <div>
+                        <h3>Cardio & Longévité</h3>
+                        <p>Indice athérogène, rapport Triglycérides/HDL et estimation du risque cardio-vasculaire global.</p>
+                    </div>
+                </div>
+                <div class="calc-cat-card" style="color: #059669;">
+                    <div class="calc-cat-icon" style="background-color: #059669;"><i data-lucide="zap"></i></div>
+                    <div>
+                        <h3>Performance Sportive</h3>
+                        <p>Apports en glucides péri-entraînement, charge d'entraînement et objectifs de VO2 Max.</p>
+                    </div>
+                </div>
+                <div class="calc-cat-card" style="color: #d97706;">
+                    <div class="calc-cat-icon" style="background-color: #d97706;"><i data-lucide="droplet"></i></div>
+                    <div>
+                        <h3>Micronutrition</h3>
+                        <p>Ajustements personnalisés des apports journaliers recommandés en minéraux (Magnésium, Sodium, Potassium).</p>
+                    </div>
+                </div>
+                <div class="calc-cat-card" style="color: #06b6d4;">
+                    <div class="calc-cat-icon" style="background-color: #06b6d4;"><i data-lucide="leaf"></i></div>
+                    <div>
+                        <h3>Bien-être & Détox</h3>
+                        <p>Évaluation du score PRAL cumulé de vos repas et analyse de l'hydratation cellulaire.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Widget Section -->
+    <section class="widget-section" id="demo">
+        <div class="container widget-grid">
+            <div>
+                <h2 style="font-size: 38px; margin-bottom: 20px;">Estimez vos besoins Keto en temps réel</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.7;">
+                    Testez directement notre moteur de calcul biologique. Ajustez les paramètres ci-contre pour estimer votre métabolisme et obtenir les macronutriments cibles pour entrer et rester en état de cétose thérapeutique ou nutritionnelle.
+                </p>
+                <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
+                    <i data-lucide="cpu" style="color: var(--primary); width:24px; height:24px;"></i>
+                    <span style="font-weight: 600;">Algorithmes pré-intégrés conformes aux formules de Katch-McArdle et TDEE réelles de l'application.</span>
+                </div>
+            </div>
+            
+            <div class="widget-card">
+                <div class="widget-form-group">
+                    <label for="weight">Poids : <span id="weight-val">80 kg</span></label>
+                    <input type="range" id="weight" class="slider-control" min="40" max="180" value="80">
+                </div>
+                
+                <div class="widget-form-group">
+                    <label for="bf">Masse grasse estimée : <span id="bf-val">22 %</span></label>
+                    <input type="range" id="bf" class="slider-control" min="5" max="50" value="22">
+                </div>
+
+                <div class="widget-form-group">
+                    <label for="activity">Niveau d'activité</label>
+                    <select id="activity" class="select-control">
+                        <option value="sedentary">Sédentaire (Bureau, peu de sport)</option>
+                        <option value="light">Activité légère (Léger exercice 1-3 fois/semaine)</option>
+                        <option value="moderate" selected>Activité modérée (Exercice modéré 3-5 fois/semaine)</option>
+                        <option value="active">Très actif (Entraînements intenses quotidiens)</option>
+                    </select>
+                </div>
+
+                <div class="widget-form-group">
+                    <label for="goal">Objectif</label>
+                    <select id="goal" class="select-control">
+                        <option value="lose">Perte de gras modérée (-20%)</option>
+                        <option value="maintain">Maintenance métabolique (0%)</option>
+                        <option value="gain">Prise de masse musculaire propre (+10%)</option>
+                    </select>
+                </div>
+
+                <div class="widget-results">
+                    <div class="result-box">
+                        <h5>Calories Cibles</h5>
+                        <div class="result-value" id="res-calories">1980</div>
+                        <div class="result-unit">kcal / jour</div>
+                    </div>
+                    <div class="result-box">
+                        <h5>Protéines</h5>
+                        <div class="result-value" id="res-proteins">125</div>
+                        <div class="result-unit">g / jour</div>
+                    </div>
+                    <div class="result-box">
+                        <h5>Lipides (Fats)</h5>
+                        <div class="result-value" id="res-fats">155</div>
+                        <div class="result-unit">g / jour</div>
+                    </div>
+                    <div class="result-box">
+                        <h5>Glucides Nets</h5>
+                        <div class="result-value">25</div>
+                        <div class="result-unit">g max / jour</div>
+                    </div>
+                    <div class="advice-box" id="res-advice">
+                        Consommez au moins 70% de vos calories sous forme de lipides sains. Gardez vos glucides nets sous la limite des 25g par jour pour garantir l'état de cétose.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta" id="cta">
+        <div class="container cta-content">
+            <h2>Prenez le contrôle de votre métabolisme dès aujourd'hui</h2>
+            <p>OleaDiet est disponible gratuitement avec des calculateurs illimités et une base de données locale rapide et sécurisée.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-white" id="btn-store-ios" onclick="alert('Bientôt disponible sur l\'App Store !')">
+                    <i data-lucide="apple"></i> App Store
+                </button>
+                <button class="btn btn-outline-white" id="btn-store-android" onclick="alert('Bientôt disponible sur Google Play !')">
+                    <i data-lucide="play"></i> Google Play
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">OleaDiet<span class="logo-dot"></span></div>
+                <p class="footer-desc">
+                    L'application de nutrition clinique, de scoring métabolique et de calculateurs biologiques qui s'appuie sur la science de la base CIQUAL.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Fonctionnalités</h4>
+                <ul>
+                    <li><a href="#features">Base CIQUAL</a></li>
+                    <li><a href="#indices">Index Glycémique</a></li>
+                    <li><a href="#calculators">Calculateurs Biologiques</a></li>
+                    <li><a href="#demo">Calculateur en Ligne</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Mentions Légales</h4>
+                <ul>
+                    <li><a href="./privacy_policy.html">Politique de Confidentialité</a></li>
+                    <li><a href="./privacy_policy.html#terms">Conditions d'Utilisation</a></li>
+                    <li><a href="mailto:support@oleadiet.com">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 OleaDiet. Tous droits réservés. Données issues de la base publique CIQUAL.</p>
+            <p>Développé avec soin pour la santé universelle.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript logic for animations, mobile menu, and interactive calculator -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Header scroll behavior
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Interactive Menu Toggle (For mobile views)
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        menuBtn.addEventListener('click', () => {
+            if(navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = '#ffffff';
+                navLinks.style.padding = '20px';
+                navLinks.style.borderBottom = '1px solid var(--border)';
+                navLinks.style.gap = '16px';
+            }
+        });
+
+        // Interactive Calculator Inputs
+        const weightInput = document.getElementById('weight');
+        const weightVal = document.getElementById('weight-val');
+        const bfInput = document.getElementById('bf');
+        const bfVal = document.getElementById('bf-val');
+        const activityInput = document.getElementById('activity');
+        const goalInput = document.getElementById('goal');
+
+        // Results placeholders
+        const resCalories = document.getElementById('res-calories');
+        const resProteins = document.getElementById('res-proteins');
+        const resFats = document.getElementById('res-fats');
+
+        // Main calculation handler
+        function calculateMacros() {
+            const weight = parseFloat(weightInput.value);
+            const bf = parseFloat(bfInput.value);
+            const activity = activityInput.value;
+            const goal = goalInput.value;
+
+            // Render slider value texts
+            weightVal.textContent = weight + ' kg';
+            bfVal.textContent = bf + ' %';
+
+            // Katch-McArdle Formula
+            // Lean Body Mass (LBM) in kg
+            const lbm = weight * (1 - (bf / 100));
+            // Basal Metabolic Rate (BMR)
+            const bmr = 370 + (21.6 * lbm);
+
+            // Activity Factor
+            let actFactor = 1.375;
+            let protMultiplier = 1.8;
+            if (activity === 'sedentary') {
+                actFactor = 1.2;
+                protMultiplier = 1.6;
+            } else if (activity === 'light') {
+                actFactor = 1.375;
+                protMultiplier = 1.8;
+            } else if (activity === 'moderate') {
+                actFactor = 1.55;
+                protMultiplier = 2.0;
+            } else if (activity === 'active') {
+                actFactor = 1.725;
+                protMultiplier = 2.2;
+            }
+
+            // Total Daily Energy Expenditure (TDEE)
+            const tdee = bmr * actFactor;
+
+            // Target Calories
+            let targetCal = tdee;
+            if (goal === 'lose') {
+                targetCal = tdee * 0.8; // 20% deficit
+            } else if (goal === 'gain') {
+                targetCal = tdee * 1.1; // 10% surplus
+            }
+
+            // Target Protein
+            const proteins = lbm * protMultiplier;
+
+            // Keto Carbohydrates Limit (fixed 25g net carbs)
+            const carbs = 25.0;
+
+            // Fats = remaining calories / 9
+            let fats = (targetCal - (proteins * 4) - (carbs * 4)) / 9;
+            if (fats < 20) fats = 20;
+
+            // Display values
+            resCalories.textContent = Math.round(targetCal);
+            resProteins.textContent = Math.round(proteins);
+            resFats.textContent = Math.round(fats);
+        }
+
+        // Add event listeners to input elements
+        weightInput.addEventListener('input', calculateMacros);
+        bfInput.addEventListener('input', calculateMacros);
+        activityInput.addEventListener('change', calculateMacros);
+        goalInput.addEventListener('change', calculateMacros);
+
+        // Initial Calculation
+        calculateMacros();
+    </script>
+</body>
+</html>
