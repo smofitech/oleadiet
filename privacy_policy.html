@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="Kgy5B2gplvuOYO4df4nlT9RRGxrBJRmn5S6vzqBdU28" />
+    <title>Politique de Confidentialité — OleaDiet</title>
+    <meta name="description" content="Politique de Confidentialité d'OleaDiet. Découvrez comment nous gérons et protégeons vos données de santé et nutrition de façon locale.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette OleaDiet - Matching index.html */
+            --primary: #6cb048;
+            --primary-dark: #548c3c;
+            --primary-light: #e8f5e3;
+            --accent: #dca014;
+            --accent-light: #fef8eb;
+            --bg-main: #f7faf4;
+            --bg-card: #ffffff;
+            --text-main: #13220c;
+            --text-muted: #4a5c43;
+            --border: #e2ebd9;
+            --shadow-sm: 0 2px 4px rgba(108, 176, 72, 0.05);
+            --shadow-md: 0 10px 25px rgba(108, 176, 72, 0.08);
+            --shadow-lg: 0 20px 40px rgba(108, 176, 72, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar style matching index.html */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .logo-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-back:hover {
+            background-color: #dbeed4;
+            text-decoration: none;
+        }
+
+        /* Policy Content Layout */
+        main {
+            padding: 48px 0 80px;
+        }
+
+        .policy-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .policy-header h1 {
+            font-size: 40px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .policy-header .last-update {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        p, ul, ol {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        .highlight-box {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Table design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        footer {
+            background-color: #13220c;
+            color: #a3c29c;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 767px) {
+            section {
+                padding: 24px;
+            }
+            .policy-header h1 {
+                font-size: 32px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                OleaDiet<span class="logo-dot"></span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <a href="./privacy_policy_en.html" class="btn-back">
+                    🇬🇧 English
+                </a>
+                <a href="./index.html" class="btn-back">
+                    <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="policy-header">
+            <h1>Politique de Confidentialité</h1>
+            <p class="last-update">Dernière mise à jour : 23 juin 2026</p>
+        </div>
+
+        <section>
+            <h2>1. Identité du Responsable de Traitement</h2>
+            <p>L'application mobile OleaDiet est éditée par :</p>
+            <ul>
+                <li><strong>Raison sociale / Nom</strong> : Smofi-Tech</li>
+                <li><strong>Adresse / Pays</strong> : France</li>
+                <li><strong>Email de contact (DPO)</strong> : <a href="mailto:smofi.tech@gmail.com">smofi.tech@gmail.com</a></li>
+                <li><strong>Pays de juridiction</strong> : France</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Nature de l'Application</h2>
+            <p>
+                OleaDiet est une application d'éducation nutritionnelle, de simulation et d'auto-évaluation. Elle n'est <strong>pas</strong> un dispositif médical au sens du Règlement (UE) 2017/745 (MDR) et ne remplace en aucun cas un avis médical professionnel, un diagnostic, une prescription ou une consultation clinique auprès d'un médecin ou d'un professionnel de santé qualifié.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. Données Collectées et Finalités</h2>
+            <p>Nous collectons et traitons les données suivantes aux fins décrites ci-après :</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Catégorie de données</th>
+                        <th>Exemples</th>
+                        <th>Finalité</th>
+                        <th>Base légale (RGPD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Profil utilisateur</strong></td>
+                        <td>Sexe (M/F), tranche d'âge, objectifs nutritionnels</td>
+                        <td>Personnalisation de l'expérience utilisateur</td>
+                        <td>Consentement explicite (Art. 6.1.a)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Données nutritionnelles</strong></td>
+                        <td>Repas enregistrés, aliments favoris, scores de compatibilité consultés</td>
+                        <td>Fonctionnalité de suivi alimentaire</td>
+                        <td>Consentement explicite (Art. 6.1.a)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Préférences d'application</strong></td>
+                        <td>Langue, thème visuel, régimes favoris, calculateurs favoris</td>
+                        <td>Personnalisation de l'interface</td>
+                        <td>Intérêt légitime (Art. 6.1.f)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                <em>Note concernant la publicité :</em> Les publicités sont actuellement désactivées dans l'application. Si elles sont activées dans une version ultérieure, le SDK AdMob de Google pourra collecter des identifiants techniques sous réserve de votre consentement explicite.
+            </p>
+        </section>
+
+        <section>
+            <h2>4. Stockage des Données — Architecture Offline-First</h2>
+            <div class="highlight-box">
+                <p>Vos données de santé et de nutrition restent sur votre appareil.</p>
+            </div>
+            <p>
+                L'ensemble des données personnelles (profil, repas, favoris, préférences) est stocké <strong>exclusivement sur la mémoire interne de votre appareil mobile</strong>, via le moteur de base de données embarqué Isar. <strong>Aucune de vos données personnelles ne transite par un serveur distant</strong> ni n'est hébergée dans le cloud.
+            </p>
+            <p>
+                Les données ne sont pas chiffrées au repos sur l'appareil. La sécurité de vos données repose sur les mécanismes de sandboxing du système d'exploitation mobile (Android/iOS) qui isolent les données de l'application des autres applications du téléphone.
+            </p>
+        </section>
+
+        <section>
+            <h2>5. Partage avec des Tiers</h2>
+            <p>OleaDiet ne transmet <strong>aucune donnée personnelle</strong> à des serveurs tiers pour traitement.</p>
+            <p>L'application n'utilise pas de serveurs distants ni d'API externes pour la gestion des repas ou du profil utilisateur.</p>
+        </section>
+
+        <section>
+            <h2>6. Durée de Conservation</h2>
+            <p>Vos données sont conservées sur votre appareil tant que l'application est installée. Vous pouvez les supprimer à tout moment :</p>
+            <ul>
+                <li>Via le bouton <strong>« Supprimer toutes mes données »</strong> situé dans l'écran Paramètres de l'application.</li>
+                <li>En effaçant les données de l'application depuis les paramètres système de votre appareil.</li>
+                <li>En désinstallant l'application de votre appareil mobile.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>7. Vos Droits (RGPD — Articles 15 à 22)</h2>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+            <ul>
+                <li><strong>Droit d'accès (Art. 15)</strong> : Toutes vos données sont stockées localement et consultables directement dans l'application.</li>
+                <li><strong>Droit de rectification (Art. 16)</strong> : Vous pouvez modifier vos données de profil à tout moment dans les Paramètres.</li>
+                <li><strong>Droit à l'effacement (Art. 17)</strong> : Vous pouvez supprimer toutes vos données via le bouton dédié dans les Paramètres ou en désinstallant l'application.</li>
+                <li><strong>Droit à la portabilité (Art. 20)</strong> : Vous pouvez exporter vos données au format JSON à tout moment depuis les Paramètres.</li>
+            </ul>
+            <p>Pour toute demande relative à l'exercice de vos droits, vous pouvez nous contacter à : <a href="mailto:smofi.tech@gmail.com">smofi.tech@gmail.com</a></p>
+        </section>
+
+        <section>
+            <h2>8. Données des Mineurs</h2>
+            <p>
+                OleaDiet n'est pas destinée aux enfants de moins de 16 ans (ou l'âge minimum de consentement numérique applicable dans votre pays). Nous ne collectons pas sciemment de données relatives à des mineurs.
+            </p>
+        </section>
+
+        <section>
+            <h2>9. Modifications de la Politique</h2>
+            <p>
+                Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. En cas de modification substantielle, une notification sera affichée dans l'application.
+            </p>
+        </section>
+
+        <section>
+            <h2>10. Contact & Réclamations</h2>
+            <p>Pour toute question ou demande : <a href="mailto:smofi.tech@gmail.com">smofi.tech@gmail.com</a></p>
+            <p>
+                Vous disposez également du droit de déposer une réclamation auprès d'une autorité de contrôle compétente, telle que la <a href="https://www.cnil.fr" target="_blank">CNIL</a> en France.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Smofi-Tech. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
