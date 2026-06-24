@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="Kgy5B2gplvuOYO4df4nlT9RRGxrBJRmn5S6vzqBdU28" />
-    <title>OleaDiet — Nutrition Scientifique & Calculateurs Biologiques</title>
-    <meta name="description" content="Découvrez OleaDiet, l'application mobile de nutrition avancée basée sur la base de données CIQUAL. Calculez vos indices de santé, évaluez la compatibilité de vos aliments avec vos régimes (Keto, FODMAP) et optimisez votre métabolisme.">
+    <title data-i18n="doc_title">OleaDiet — Scientific Nutrition & Biological Calculators</title>
+    <meta name="description" content="Discover OleaDiet, the advanced mobile nutrition application based on the CIQUAL database. Calculate health indices, evaluate diet compatibility, and optimize your metabolism.">
+    <meta name="keywords" content="OleaDiet, ciqual, nutrition, keto, glycemic index, index glycémique, score PRAL, groupe NOVA, health calculators, calculateurs biologiques, calorie tracking, diet compatibility" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://smofitech.github.io/oleadiet/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://smofitech.github.io/oleadiet/" />
+    <meta property="og:title" content="OleaDiet — Scientific Nutrition & Biological Calculators" />
+    <meta property="og:description" content="Discover OleaDiet, the advanced mobile nutrition application based on the CIQUAL database. Calculate health indices, evaluate diet compatibility, and optimize your metabolism." />
+    <meta property="og:image" content="https://smofitech.github.io/oleadiet/oleadiet_app_mockup.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="OleaDiet" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://smofitech.github.io/oleadiet/" />
+    <meta name="twitter:title" content="OleaDiet — Scientific Nutrition & Biological Calculators" />
+    <meta name="twitter:description" content="Discover OleaDiet, the advanced mobile nutrition application based on the CIQUAL database. Calculate health indices, evaluate diet compatibility, and optimize your metabolism." />
+    <meta name="twitter:image" content="https://smofitech.github.io/oleadiet/oleadiet_app_mockup.png" />
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -44,6 +64,7 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: var(--transition);
         }
 
         h1, h2, h3, h4 {
@@ -72,7 +93,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(247, 250, 244, 0.85);
+            background: rgba(247, 250, 244, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
@@ -113,7 +134,7 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
         }
 
         nav a {
@@ -124,6 +145,29 @@
 
         nav a:hover {
             color: var(--primary-dark);
+        }
+
+        .lang-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-dropdown {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background-color: #ffffff;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-main);
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .lang-dropdown:focus {
+            border-color: var(--primary);
         }
 
         .btn {
@@ -720,6 +764,23 @@
             color: #a3c29c;
         }
 
+        /* RTL Specific styles when active */
+        html[dir="rtl"] {
+            text-align: right;
+        }
+        html[dir="rtl"] .logo-dot {
+            margin-right: 0;
+            margin-left: 5px;
+        }
+        html[dir="rtl"] .badge-item {
+            flex-direction: row-reverse;
+        }
+        html[dir="rtl"] .advice-box {
+            border-left: none;
+            border-right: 4px solid var(--accent);
+            text-align: right;
+        }
+
         /* Responsive Styles */
         @media (max-width: 991px) {
             .hero-grid, .indices-grid, .widget-grid {
@@ -786,12 +847,21 @@
                 OleaDiet<span class="logo-dot"></span>
             </div>
             <nav class="nav-links">
-                <a href="#features">Fonctionnalités</a>
-                <a href="#indices">Indices Clés</a>
-                <a href="#calculators">Calculateurs</a>
-                <a href="#demo">Démo Interactive</a>
-                <a href="./privacy_policy.html">Confidentialité</a>
-                <a href="#cta" class="btn btn-primary" id="btn-nav-download">Télécharger</a>
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#indices" data-i18n="nav_indices">Key Indices</a>
+                <a href="#calculators" data-i18n="nav_calculators">Calculators</a>
+                <a href="#demo" data-i18n="nav_demo">Interactive Demo</a>
+                <div class="lang-select-wrapper">
+                    <i data-lucide="globe" style="width:16px;height:16px;color:var(--text-muted);"></i>
+                    <select id="lang-select" class="lang-dropdown" aria-label="Language selection">
+                        <option value="en">🇬🇧 English</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="ar_std">🇹🇳 العربية</option>
+                    </select>
+                </div>
+                <a href="#cta" class="btn btn-primary" id="btn-nav-download" data-i18n="nav_download">Download</a>
             </nav>
             <button class="menu-toggle" id="menu-btn" aria-label="Menu de navigation">
                 <i data-lucide="menu"></i>
@@ -803,26 +873,26 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
-                <h1>Votre santé biologique, <span>optimisée par la science</span></h1>
-                <p class="hero-subtitle">
-                    OleaDiet combine la rigueur de la base nutritionnelle officielle <strong>CIQUAL</strong> à des calculateurs biologiques avancés pour vous offrir une précision de santé inégalée.
+                <h1><span data-i18n="hero_title_1">Your biological health,</span> <span data-i18n="hero_title_2">optimized by science</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    OleaDiet combines the rigor of the official CIQUAL nutritional database with advanced biological calculators to offer you unparalleled health precision.
                 </p>
                 <div class="hero-actions">
-                    <a href="#cta" class="btn btn-primary" id="btn-hero-dl">Télécharger l'application</a>
-                    <a href="#demo" class="btn btn-secondary" id="btn-hero-demo">Calculateur de démo</a>
+                    <a href="#cta" class="btn btn-primary" id="btn-hero-dl" data-i18n="hero_dl_btn">Download the App</a>
+                    <a href="#demo" class="btn btn-secondary" id="btn-hero-demo" data-i18n="hero_demo_btn">Interactive Demo</a>
                 </div>
                 <div class="hero-badges">
                     <div class="badge-item">
                         <div class="badge-icon"><i data-lucide="shield-check" style="width:16px;height:16px;"></i></div>
-                        <span>Sans approximation</span>
+                        <span data-i18n="badge_no_approx">No approximation</span>
                     </div>
                     <div class="badge-item">
                         <div class="badge-icon"><i data-lucide="globe" style="width:16px;height:16px;"></i></div>
-                        <span>Traduite en 5 langues</span>
+                        <span data-i18n="badge_5_langs">5 Languages Supported</span>
                     </div>
                     <div class="badge-item">
                         <div class="badge-icon"><i data-lucide="database" style="width:16px;height:16px;"></i></div>
-                        <span>Isar Database Locale</span>
+                        <span data-i18n="badge_local_db">Local Isar Database</span>
                     </div>
                 </div>
             </div>
@@ -838,24 +908,24 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>Conçue pour la précision biologique</h2>
-                <p>OleaDiet élimine le hasard. Découvrez une suite d'outils analytiques pensée pour les exigences de votre santé.</p>
+                <h2 data-i18n="feat_header_title">Designed for Biological Precision</h2>
+                <p data-i18n="feat_header_sub">OleaDiet eliminates guesswork. Discover a suite of analytical tools designed for your health requirements.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="icon-box"><i data-lucide="search"></i></div>
-                    <h3>Recherche CIQUAL Officielle</h3>
-                    <p>Recherchez parmi des milliers d'aliments et accédez instantanément à leur composition exacte en vitamines, minéraux et macronutriments, issue des données scientifiques de référence.</p>
+                    <h3 data-i18n="feat_card_1_title">Official CIQUAL Search</h3>
+                    <p data-i18n="feat_card_1_desc">Search through thousands of foods and instantly access their exact composition in vitamins, minerals, and macronutrients from reference scientific data.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon-box"><i data-lucide="sliders"></i></div>
-                    <h3>Compatibilité de Régimes</h3>
-                    <p>Votre profil configure des filtres stricts. L'application calcule les scores de compatibilité pour le régime Cétogène (Keto), Méditerranéen, Low-FODMAP et Cardio-vasculaire.</p>
+                    <h3 data-i18n="feat_card_2_title">Diet Compatibility</h3>
+                    <p data-i18n="feat_card_2_desc">Your profile configures strict filters. The app calculates compatibility scores for Ketogenic (Keto), Mediterranean, Low-FODMAP, and Cardiovascular diets.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon-box"><i data-lucide="activity"></i></div>
-                    <h3>6 Catégories de Calculateurs</h3>
-                    <p>Que vous cherchiez à optimiser vos électrolytes, calculer votre TDEE, votre rapport sodium-potassium ou votre score PRAL acido-basique, OleaDiet met à disposition des outils biologiques complets.</p>
+                    <h3 data-i18n="feat_card_3_title">6 Calculator Categories</h3>
+                    <p data-i18n="feat_card_3_desc">Whether you want to optimize your electrolytes, calculate your TDEE, sodium-potassium ratio, or renal PRAL acid-base score, OleaDiet provides complete biological tools.</p>
                 </div>
             </div>
         </div>
@@ -865,45 +935,45 @@
     <section class="indices-section" id="indices">
         <div class="container indices-grid">
             <div>
-                <h2 style="font-size: 36px; margin-bottom: 20px;">Des marqueurs de santé incontournables</h2>
-                <p style="color: var(--text-muted); margin-bottom: 30px;">
-                    Chaque aliment contient des données plus complexes que les simples calories. OleaDiet extrait et qualifie les marqueurs fondamentaux pour éclairer vos choix alimentaires.
+                <h2 style="font-size: 36px; margin-bottom: 20px;" data-i18n="indices_header_title">Essential Health Markers</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;" data-i18n="indices_header_sub">
+                    Every food contains data more complex than simple calories. OleaDiet extracts and qualifies key markers to inform your dietary choices.
                 </p>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; padding: 0;">
                     <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
-                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Indice Glycémique (IG) & Glucides Nets
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> <span data-i18n="indices_li_1">Glycemic Index (GI) & Net Carbs</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
-                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Classification NOVA (Niveau de transformation)
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> <span data-i18n="indices_li_2">NOVA Classification (Industrial transformation level)</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
-                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Indice PRAL (Équilibre acido-basique rénal)
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> <span data-i18n="indices_li_3">PRAL Index (Renal acid-base load)</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 12px; font-weight: 500;">
-                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> Densité Calorique (Kcal/g)
+                        <i data-lucide="check-circle-2" style="color: var(--primary);"></i> <span data-i18n="indices_li_4">Calorie Density (Kcal/g)</span>
                     </li>
                 </ul>
             </div>
             <div class="indices-visual">
                 <div class="index-item-card">
-                    <h4>Index Glycémique</h4>
-                    <p>Déterminez la vitesse à laquelle les glucides augmentent la glycémie sanguine.</p>
-                    <span class="indicator-pill pill-green">Bas (≤ 55)</span>
+                    <h4 data-i18n="card_gi_title">Glycemic Index</h4>
+                    <p data-i18n="card_gi_desc">Determine how quickly carbohydrates raise blood glucose levels.</p>
+                    <span class="indicator-pill pill-green" data-i18n="card_gi_pill">Low (≤ 55)</span>
                 </div>
                 <div class="index-item-card">
-                    <h4>Groupe NOVA</h4>
-                    <p>Mesure le degré de transformation industrielle des ingrédients.</p>
-                    <span class="indicator-pill pill-blue">NOVA 1 (Non transformé)</span>
+                    <h4 data-i18n="card_nova_title">NOVA Group</h4>
+                    <p data-i18n="card_nova_desc">Measure the degree of industrial processing of ingredients.</p>
+                    <span class="indicator-pill pill-blue" data-i18n="card_nova_pill">NOVA 1 (Unprocessed)</span>
                 </div>
                 <div class="index-item-card">
-                    <h4>Indice PRAL</h4>
-                    <p>Estime la charge acide ou alcaline d'un aliment sur votre système rénal.</p>
-                    <span class="indicator-pill pill-orange">Alcalin (Score < 0)</span>
+                    <h4 data-i18n="card_pral_title">PRAL Index</h4>
+                    <p data-i18n="card_pral_desc">Estimate the acid or alkaline load of a food on your renal system.</p>
+                    <span class="indicator-pill pill-orange" data-i18n="card_pral_pill">Alkaline (Score < 0)</span>
                 </div>
                 <div class="index-item-card">
-                    <h4>Densité Calorique</h4>
-                    <p>Rapport calories/poids. Privilégiez les faibles densités pour la satiété.</p>
-                    <span class="indicator-pill pill-red">Haute (≥ 4.0 kcal/g)</span>
+                    <h4 data-i18n="card_cd_title">Calorie Density</h4>
+                    <p data-i18n="card_cd_desc">Calories to weight ratio. Favor low densities for satiety.</p>
+                    <span class="indicator-pill pill-red" data-i18n="card_cd_pill">High (≥ 4.0 kcal/g)</span>
                 </div>
             </div>
         </div>
@@ -913,50 +983,50 @@
     <section class="calculators-section" id="calculators">
         <div class="container">
             <div class="section-header">
-                <h2>Vos outils de biologie clinique et métabolique</h2>
-                <p>OleaDiet intègre plus de 30 calculateurs spécifiques répartis en grandes sphères fonctionnelles de la santé.</p>
+                <h2 data-i18n="calc_header_title">Your Clinical & Metabolic Biology Tools</h2>
+                <p data-i18n="calc_header_sub">OleaDiet integrates over 30 specific calculators across major functional health domains.</p>
             </div>
             <div class="calc-categories-grid">
                 <div class="calc-cat-card" style="color: #0d9488;">
                     <div class="calc-cat-icon" style="background-color: #0d9488;"><i data-lucide="pie-chart"></i></div>
                     <div>
-                        <h3>Keto & Nutrition</h3>
-                        <p>Macros cétogènes précises, ratios de lipides et seuils personnalisés de glucides nets.</p>
+                        <h3 data-i18n="calc_cat_1_title">Keto & Nutrition</h3>
+                        <p data-i18n="calc_cat_1_desc">Precise ketogenic macros, fat ratios, and custom net carb thresholds.</p>
                     </div>
                 </div>
                 <div class="calc-cat-card" style="color: #2563eb;">
                     <div class="calc-cat-icon" style="background-color: #2563eb;"><i data-lucide="scale"></i></div>
                     <div>
-                        <h3>Métabolisme & Poids</h3>
-                        <p>Estimation du métabolisme de base (BMR), dépenses totales (TDEE) et déficits optimisés.</p>
+                        <h3 data-i18n="calc_cat_2_title">Metabolism & Weight</h3>
+                        <p data-i18n="calc_cat_2_desc">Estimation of basal metabolic rate (BMR), total daily energy expenditure (TDEE), and optimized deficits.</p>
                     </div>
                 </div>
                 <div class="calc-cat-card" style="color: #dc2626;">
                     <div class="calc-cat-icon" style="background-color: #dc2626;"><i data-lucide="heart"></i></div>
                     <div>
-                        <h3>Cardio & Longévité</h3>
-                        <p>Indice athérogène, rapport Triglycérides/HDL et estimation du risque cardio-vasculaire global.</p>
+                        <h3 data-i18n="calc_cat_3_title">Cardio & Longevity</h3>
+                        <p data-i18n="calc_cat_3_desc">Atherogenic index, Triglyceride/HDL ratio, and global cardiovascular risk estimation.</p>
                     </div>
                 </div>
                 <div class="calc-cat-card" style="color: #059669;">
                     <div class="calc-cat-icon" style="background-color: #059669;"><i data-lucide="zap"></i></div>
                     <div>
-                        <h3>Performance Sportive</h3>
-                        <p>Apports en glucides péri-entraînement, charge d'entraînement et objectifs de VO2 Max.</p>
+                        <h3 data-i18n="calc_cat_4_title">Athletic Performance</h3>
+                        <p data-i18n="calc_cat_4_desc">Peri-workout carbohydrate intake, training load, and VO2 Max targets.</p>
                     </div>
                 </div>
                 <div class="calc-cat-card" style="color: #d97706;">
                     <div class="calc-cat-icon" style="background-color: #d97706;"><i data-lucide="droplet"></i></div>
                     <div>
-                        <h3>Micronutrition</h3>
-                        <p>Ajustements personnalisés des apports journaliers recommandés en minéraux (Magnésium, Sodium, Potassium).</p>
+                        <h3 data-i18n="calc_cat_5_title">Micronutrition</h3>
+                        <p data-i18n="calc_cat_5_desc">Personalized adjustments of recommended daily intakes for minerals (Magnesium, Sodium, Potassium).</p>
                     </div>
                 </div>
                 <div class="calc-cat-card" style="color: #06b6d4;">
                     <div class="calc-cat-icon" style="background-color: #06b6d4;"><i data-lucide="leaf"></i></div>
                     <div>
-                        <h3>Bien-être & Détox</h3>
-                        <p>Évaluation du score PRAL cumulé de vos repas et analyse de l'hydratation cellulaire.</p>
+                        <h3 data-i18n="calc_cat_6_title">Wellness & Detox</h3>
+                        <p data-i18n="calc_cat_6_desc">Evaluation of cumulative meal PRAL scores and cellular hydration analysis.</p>
                     </div>
                 </div>
             </div>
@@ -967,69 +1037,69 @@
     <section class="widget-section" id="demo">
         <div class="container widget-grid">
             <div>
-                <h2 style="font-size: 38px; margin-bottom: 20px;">Estimez vos besoins Keto en temps réel</h2>
-                <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.7;">
-                    Testez directement notre moteur de calcul biologique. Ajustez les paramètres ci-contre pour estimer votre métabolisme et obtenir les macronutriments cibles pour entrer et rester en état de cétose thérapeutique ou nutritionnelle.
+                <h2 style="font-size: 38px; margin-bottom: 20px;" data-i18n="demo_header_title">Estimate your Keto needs in real time</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.7;" data-i18n="demo_header_sub">
+                    Test our biological calculation engine directly. Adjust the settings to estimate your metabolism and target macros.
                 </p>
                 <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
                     <i data-lucide="cpu" style="color: var(--primary); width:24px; height:24px;"></i>
-                    <span style="font-weight: 600;">Algorithmes pré-intégrés conformes aux formules de Katch-McArdle et TDEE réelles de l'application.</span>
+                    <span style="font-weight: 600;" data-i18n="demo_bullet_1">Pre-integrated algorithms matching real Katch-McArdle and TDEE formulas.</span>
                 </div>
             </div>
             
             <div class="widget-card">
                 <div class="widget-form-group">
-                    <label for="weight">Poids : <span id="weight-val">80 kg</span></label>
+                    <label for="weight"><span data-i18n="lbl_weight">Weight:</span> <span id="weight-val">80 kg</span></label>
                     <input type="range" id="weight" class="slider-control" min="40" max="180" value="80">
                 </div>
                 
                 <div class="widget-form-group">
-                    <label for="bf">Masse grasse estimée : <span id="bf-val">22 %</span></label>
+                    <label for="bf"><span data-i18n="lbl_body_fat">Estimated Body Fat:</span> <span id="bf-val">22 %</span></label>
                     <input type="range" id="bf" class="slider-control" min="5" max="50" value="22">
                 </div>
 
                 <div class="widget-form-group">
-                    <label for="activity">Niveau d'activité</label>
+                    <label for="activity" data-i18n="lbl_activity">Activity Level</label>
                     <select id="activity" class="select-control">
-                        <option value="sedentary">Sédentaire (Bureau, peu de sport)</option>
-                        <option value="light">Activité légère (Léger exercice 1-3 fois/semaine)</option>
-                        <option value="moderate" selected>Activité modérée (Exercice modéré 3-5 fois/semaine)</option>
-                        <option value="active">Très actif (Entraînements intenses quotidiens)</option>
+                        <option value="sedentary" data-i18n="opt_sedentary">Sedentary (Desk job, little exercise)</option>
+                        <option value="light" data-i18n="opt_light">Lightly Active (Light exercise 1-3 times/week)</option>
+                        <option value="moderate" selected data-i18n="opt_moderate">Moderately Active (Moderate exercise 3-5 times/week)</option>
+                        <option value="active" data-i18n="opt_active">Very Active (Intense daily training)</option>
                     </select>
                 </div>
 
                 <div class="widget-form-group">
-                    <label for="goal">Objectif</label>
+                    <label for="goal" data-i18n="lbl_goal">Goal</label>
                     <select id="goal" class="select-control">
-                        <option value="lose">Perte de gras modérée (-20%)</option>
-                        <option value="maintain">Maintenance métabolique (0%)</option>
-                        <option value="gain">Prise de masse musculaire propre (+10%)</option>
+                        <option value="lose" data-i18n="opt_lose">Moderate fat loss (-20%)</option>
+                        <option value="maintain" data-i18n="opt_maintain">Metabolic maintenance (0%)</option>
+                        <option value="gain" data-i18n="opt_gain">Clean muscle gain (+10%)</option>
                     </select>
                 </div>
 
                 <div class="widget-results">
                     <div class="result-box">
-                        <h5>Calories Cibles</h5>
+                        <h5 data-i18n="res_calories_lbl">Target Calories</h5>
                         <div class="result-value" id="res-calories">1980</div>
-                        <div class="result-unit">kcal / jour</div>
+                        <div class="result-unit">kcal / day</div>
                     </div>
                     <div class="result-box">
-                        <h5>Protéines</h5>
+                        <h5 data-i18n="res_proteins_lbl">Proteins</h5>
                         <div class="result-value" id="res-proteins">125</div>
-                        <div class="result-unit">g / jour</div>
+                        <div class="result-unit" data-i18n="res_unit_day">g / day</div>
                     </div>
                     <div class="result-box">
-                        <h5>Lipides (Fats)</h5>
+                        <h5 data-i18n="res_fats_lbl">Fats</h5>
                         <div class="result-value" id="res-fats">155</div>
-                        <div class="result-unit">g / jour</div>
+                        <div class="result-unit" data-i18n="res_unit_day">g / day</div>
                     </div>
                     <div class="result-box">
-                        <h5>Glucides Nets</h5>
+                        <h5 data-i18n="res_carbs_lbl">Net Carbs</h5>
                         <div class="result-value">25</div>
-                        <div class="result-unit">g max / jour</div>
+                        <div class="result-unit" data-i18n="res_unit_max">g max / day</div>
                     </div>
-                    <div class="advice-box" id="res-advice">
-                        Consommez au moins 70% de vos calories sous forme de lipides sains. Gardez vos glucides nets sous la limite des 25g par jour pour garantir l'état de cétose.
+                    <div class="advice-box" id="res-advice" data-i18n="res_advice_text">
+                        Consume at least 70% of your calories as healthy fats. Keep net carbs below the 25g daily limit to ensure ketosis.
                     </div>
                 </div>
             </div>
@@ -1039,13 +1109,13 @@
     <!-- Call to Action Section -->
     <section class="cta" id="cta">
         <div class="container cta-content">
-            <h2>Prenez le contrôle de votre métabolisme dès aujourd'hui</h2>
-            <p>OleaDiet est disponible gratuitement avec des calculateurs illimités et une base de données locale rapide et sécurisée.</p>
+            <h2 data-i18n="cta_title">Take control of your metabolism today</h2>
+            <p data-i18n="cta_subtitle">OleaDiet is available for free with unlimited calculators and a fast, secure local database.</p>
             <div class="cta-buttons">
-                <button class="btn btn-white" id="btn-store-ios" onclick="alert('Bientôt disponible sur l\'App Store !')">
+                <button class="btn btn-white" id="btn-store-ios" onclick="alert('Coming soon on the App Store!')">
                     <i data-lucide="apple"></i> App Store
                 </button>
-                <button class="btn btn-outline-white" id="btn-store-android" onclick="alert('Bientôt disponible sur Google Play !')">
+                <button class="btn btn-outline-white" id="btn-store-android" onclick="alert('Coming soon on Google Play!')">
                     <i data-lucide="play"></i> Google Play
                 </button>
             </div>
@@ -1057,21 +1127,21 @@
         <div class="container footer-grid">
             <div>
                 <div class="footer-logo">OleaDiet<span class="logo-dot"></span></div>
-                <p class="footer-desc">
-                    L'application de nutrition clinique, de scoring métabolique et de calculateurs biologiques qui s'appuie sur la science de la base CIQUAL.
+                <p class="footer-desc" data-i18n="footer_desc">
+                    The clinical nutrition, metabolic scoring, and biological calculator app built on the science of the CIQUAL database.
                 </p>
             </div>
             <div class="footer-col">
-                <h4>Fonctionnalités</h4>
+                <h4 data-i18n="nav_features">Features</h4>
                 <ul>
-                    <li><a href="#features">Base CIQUAL</a></li>
-                    <li><a href="#indices">Index Glycémique</a></li>
-                    <li><a href="#calculators">Calculateurs Biologiques</a></li>
-                    <li><a href="#demo">Calculateur en Ligne</a></li>
+                    <li><a href="#features" data-i18n="feat_card_1_title">Official CIQUAL Search</a></li>
+                    <li><a href="#indices" data-i18n="card_gi_title">Glycemic Index</a></li>
+                    <li><a href="#calculators" data-i18n="nav_calculators">Calculators</a></li>
+                    <li><a href="#demo" data-i18n="nav_demo">Interactive Demo</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Mentions Légales</h4>
+                <h4 data-i18n="footer_legals">Legal Mentions</h4>
                 <ul>
                     <li><a href="./privacy_policy.html">Politique de Confidentialité (FR)</a></li>
                     <li><a href="./privacy_policy_en.html">Privacy Policy (EN)</a></li>
@@ -1080,15 +1150,494 @@
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; 2026 OleaDiet. Tous droits réservés. Données issues de la base publique CIQUAL.</p>
-            <p>Développé avec soin pour la santé universelle.</p>
+            <p data-i18n="footer_rights">&copy; 2026 OleaDiet. All rights reserved. Data from the public CIQUAL database.</p>
+            <p data-i18n="footer_handcrafted">Developed with care for universal health.</p>
         </div>
     </footer>
 
-    <!-- JavaScript logic for animations, mobile menu, and interactive calculator -->
+    <!-- JavaScript Translations & logic -->
     <script>
+        // Translations Dictionary
+        const i18nData = {
+            en: {
+                doc_title: "OleaDiet — Scientific Nutrition & Biological Calculators",
+                nav_features: "Features",
+                nav_indices: "Key Indices",
+                nav_calculators: "Calculators",
+                nav_demo: "Interactive Demo",
+                nav_download: "Download",
+                hero_title_1: "Your biological health,",
+                hero_title_2: "optimized by science",
+                hero_subtitle: "OleaDiet combines the rigor of the official CIQUAL nutritional database with advanced biological calculators to offer you unparalleled health precision.",
+                hero_dl_btn: "Download the App",
+                hero_demo_btn: "Interactive Demo",
+                badge_no_approx: "No approximation",
+                badge_5_langs: "5 Languages Supported",
+                badge_local_db: "Local Isar Database",
+                feat_header_title: "Designed for Biological Precision",
+                feat_header_sub: "OleaDiet eliminates guesswork. Discover a suite of analytical tools designed for your health requirements.",
+                feat_card_1_title: "Official CIQUAL Search",
+                feat_card_1_desc: "Search through thousands of foods and instantly access their exact composition in vitamins, minerals, and macronutrients from reference scientific data.",
+                feat_card_2_title: "Diet Compatibility",
+                feat_card_2_desc: "Your profile configures strict filters. The app calculates compatibility scores for Ketogenic (Keto), Mediterranean, Low-FODMAP, and Cardiovascular diets.",
+                feat_card_3_title: "6 Calculator Categories",
+                feat_card_3_desc: "Whether you want to optimize your electrolytes, calculate your TDEE, sodium-potassium ratio, or renal PRAL acid-base score, OleaDiet provides complete biological tools.",
+                indices_header_title: "Essential Health Markers",
+                indices_header_sub: "Every food contains data more complex than simple calories. OleaDiet extracts and qualifies key markers to inform your dietary choices.",
+                indices_li_1: "Glycemic Index (GI) & Net Carbs",
+                indices_li_2: "NOVA Classification (Industrial transformation level)",
+                indices_li_3: "PRAL Index (Renal acid-base load)",
+                indices_li_4: "Calorie Density (Kcal/g)",
+                card_gi_title: "Glycemic Index",
+                card_gi_desc: "Determine how quickly carbohydrates raise blood glucose levels.",
+                card_gi_pill: "Low (≤ 55)",
+                card_nova_title: "NOVA Group",
+                card_nova_desc: "Measure the degree of industrial processing of ingredients.",
+                card_nova_pill: "NOVA 1 (Unprocessed)",
+                card_pral_title: "PRAL Index",
+                card_pral_desc: "Estimate the acid or alkaline load of a food on your renal system.",
+                card_pral_pill: "Alkaline (Score < 0)",
+                card_cd_title: "Calorie Density",
+                card_cd_desc: "Calories to weight ratio. Favor low densities for satiety.",
+                card_cd_pill: "High (≥ 4.0 kcal/g)",
+                calc_header_title: "Your Clinical & Metabolic Biology Tools",
+                calc_header_sub: "OleaDiet integrates over 30 specific calculators across major functional health domains.",
+                calc_cat_1_title: "Keto & Nutrition",
+                calc_cat_1_desc: "Precise ketogenic macros, fat ratios, and custom net carb thresholds.",
+                calc_cat_2_title: "Metabolism & Weight",
+                calc_cat_2_desc: "Basal metabolic rate (BMR), total daily energy expenditure (TDEE), and optimized deficits calculations.",
+                calc_cat_3_title: "Cardio & Longevity",
+                calc_cat_3_desc: "Atherogenic index, Triglyceride/HDL ratio, and global cardiovascular risk estimation.",
+                calc_cat_4_title: "Athletic Performance",
+                calc_cat_4_desc: "Peri-workout carbohydrate intake, training load, and VO2 Max targets.",
+                calc_cat_5_title: "Micronutrition",
+                calc_cat_5_desc: "Personalized adjustments of recommended daily intakes for minerals (Magnesium, Sodium, Potassium).",
+                calc_cat_6_title: "Wellness & Detox",
+                calc_cat_6_desc: "Evaluation of cumulative meal PRAL scores and cellular hydration analysis.",
+                demo_header_title: "Estimate your Keto needs in real time",
+                demo_header_sub: "Test our biological calculation engine directly. Adjust the settings to estimate your metabolism and target macros.",
+                demo_bullet_1: "Pre-integrated algorithms matching real Katch-McArdle and TDEE formulas.",
+                lbl_weight: "Weight:",
+                lbl_body_fat: "Estimated Body Fat:",
+                lbl_activity: "Activity Level",
+                lbl_goal: "Goal",
+                opt_sedentary: "Sedentary (Desk job, little exercise)",
+                opt_light: "Lightly Active (Light exercise 1-3 times/week)",
+                opt_moderate: "Moderately Active (Moderate exercise 3-5 times/week)",
+                opt_active: "Very Active (Intense daily training)",
+                opt_lose: "Moderate fat loss (-20%)",
+                opt_maintain: "Metabolic maintenance (0%)",
+                opt_gain: "Clean muscle gain (+10%)",
+                res_calories_lbl: "Target Calories",
+                res_proteins_lbl: "Proteins",
+                res_fats_lbl: "Fats",
+                res_carbs_lbl: "Net Carbs",
+                res_unit_day: "g / day",
+                res_unit_max: "g max / day",
+                res_advice_text: "Consume at least 70% of your calories as healthy fats. Keep net carbs below the 25g daily limit to ensure ketosis.",
+                cta_title: "Take control of your metabolism today",
+                cta_subtitle: "OleaDiet is available for free with unlimited calculators and a fast, secure local database.",
+                footer_desc: "The clinical nutrition, metabolic scoring, and biological calculator app built on the science of the CIQUAL database.",
+                footer_legals: "Legal Mentions",
+                footer_rights: "© 2026 OleaDiet. All rights reserved. Data from the public CIQUAL database.",
+                footer_handcrafted: "Developed with care for universal health."
+            },
+            fr: {
+                doc_title: "OleaDiet — Nutrition Scientifique & Calculateurs Biologiques",
+                nav_features: "Fonctionnalités",
+                nav_indices: "Indices Clés",
+                nav_calculators: "Calculateurs",
+                nav_demo: "Démo Interactive",
+                nav_download: "Télécharger",
+                hero_title_1: "Votre santé biologique,",
+                hero_title_2: "optimisée par la science",
+                hero_subtitle: "OleaDiet combine la rigueur de la base nutritionnelle officielle CIQUAL à des calculateurs biologiques avancés pour vous offrir une précision de santé inégalée.",
+                hero_dl_btn: "Télécharger l'application",
+                hero_demo_btn: "Calculateur de démo",
+                badge_no_approx: "Sans approximation",
+                badge_5_langs: "Traduit en 5 langues",
+                badge_local_db: "Base Isar Locale",
+                feat_header_title: "Conçue pour la précision biologique",
+                feat_header_sub: "OleaDiet élimine le hasard. Découvrez une suite d'outils analytiques pensée pour les exigences de votre santé.",
+                feat_card_1_title: "Recherche CIQUAL Officielle",
+                feat_card_1_desc: "Recherchez parmi des milliers d'aliments et accédez instantanément à leur composition exacte en vitamines, minéraux et macronutriments, issue des données scientifiques de référence.",
+                feat_card_2_title: "Compatibilité de Régimes",
+                feat_card_2_desc: "Votre profil configure des filtres stricts. L'application calcule les scores de compatibilité pour le régime Cétogène (Keto), Méditerranéen, Low-FODMAP et Cardio-vasculaire.",
+                feat_card_3_title: "6 Catégories de Calculateurs",
+                feat_card_3_desc: "Que vous cherchiez à optimiser vos électrolytes, calculer votre TDEE, votre rapport sodium-potassium ou votre score PRAL acido-basique, OleaDiet met à disposition des outils biologiques complets.",
+                indices_header_title: "Des marqueurs de santé incontournables",
+                indices_header_sub: "Chaque aliment contient des données plus complexes que les simples calories. OleaDiet extrait et qualifie les marqueurs fondamentaux pour éclairer vos choix alimentaires.",
+                indices_li_1: "Index Glycémique (IG) & Glucides Nets",
+                indices_li_2: "Classification NOVA (Niveau de transformation)",
+                indices_li_3: "Indice PRAL (Équilibre acido-basique rénal)",
+                indices_li_4: "Densité Calorique (Kcal/g)",
+                card_gi_title: "Index Glycémique",
+                card_gi_desc: "Déterminez la vitesse à laquelle les glucides augmentent la glycémie sanguine.",
+                card_gi_pill: "Bas (≤ 55)",
+                card_nova_title: "Groupe NOVA",
+                card_nova_desc: "Mesure le degré de transformation industrielle des ingrédients.",
+                card_nova_pill: "NOVA 1 (Non transformé)",
+                card_pral_title: "Indice PRAL",
+                card_pral_desc: "Estime la charge acide ou alcaline d'un aliment sur votre système rénal.",
+                card_pral_pill: "Alcalin (Score < 0)",
+                card_cd_title: "Densité Calorique",
+                card_cd_desc: "Rapport calories/poids. Privilégiez les faibles densités pour la satiété.",
+                card_cd_pill: "Haute (≥ 4.0 kcal/g)",
+                calc_header_title: "Vos outils de biologie clinique et métabolique",
+                calc_header_sub: "OleaDiet intègre plus de 30 calculateurs spécifiques répartis en grandes sphères fonctionnelles de la santé.",
+                calc_cat_1_title: "Keto & Nutrition",
+                calc_cat_1_desc: "Macros cétogènes précises, ratios de lipides et seuils personnalisés de glucides nets.",
+                calc_cat_2_title: "Métabolisme & Poids",
+                calc_cat_2_desc: "Estimation du métabolisme de base (BMR), dépenses totales (TDEE) et déficits optimisés.",
+                calc_cat_3_title: "Cardio & Longévité",
+                calc_cat_3_desc: "Indice athérogène, rapport Triglycérides/HDL et estimation du risque cardio-vasculaire global.",
+                calc_cat_4_title: "Performance Sportive",
+                calc_cat_4_desc: "Apports en glucides péri-entraînement, charge d'entraînement et objectifs de VO2 Max.",
+                calc_cat_5_title: "Micronutrition",
+                calc_cat_5_desc: "Ajustements personnalisés des apports journaliers recommandés en minéraux (Magnésium, Sodium, Potassium).",
+                calc_cat_6_title: "Bien-être & Détox",
+                calc_cat_6_desc: "Évaluation du score PRAL cumulé de vos repas et analyse de l'hydratation cellulaire.",
+                demo_header_title: "Estimez vos besoins Keto en temps réel",
+                demo_header_sub: "Testez directement notre moteur de calcul biologique. Ajustez les paramètres ci-contre pour estimer votre métabolisme et obtenir les macronutriments cibles.",
+                demo_bullet_1: "Algorithmes pré-intégrés conformes aux formules de Katch-McArdle et TDEE réelles.",
+                lbl_weight: "Poids :",
+                lbl_body_fat: "Masse grasse estimée :",
+                lbl_activity: "Niveau d'activité",
+                lbl_goal: "Objectif",
+                opt_sedentary: "Sédentaire (Bureau, peu de sport)",
+                opt_light: "Activité légère (Léger exercice 1-3 fois/semaine)",
+                opt_moderate: "Activité modérée (Exercice modéré 3-5 fois/semaine)",
+                opt_active: "Très actif (Entraînements intenses quotidiens)",
+                opt_lose: "Perte de gras modérée (-20%)",
+                opt_maintain: "Maintenance métabolique (0%)",
+                opt_gain: "Prise de masse musculaire propre (+10%)",
+                res_calories_lbl: "Calories Cibles",
+                res_proteins_lbl: "Protéines",
+                res_fats_lbl: "Lipides (Fats)",
+                res_carbs_lbl: "Glucides Nets",
+                res_unit_day: "g / jour",
+                res_unit_max: "g max / jour",
+                res_advice_text: "Consommez au moins 70% de vos calories sous forme de lipides sains. Gardez vos glucides nets sous la limite des 25g par jour pour garantir l'état de cétose.",
+                cta_title: "Prenez le contrôle de votre métabolisme dès aujourd'hui",
+                cta_subtitle: "OleaDiet est disponible gratuitement avec des calculateurs illimités et une base de données locale rapide et sécurisée.",
+                footer_desc: "L'application de nutrition clinique, de scoring métabolique et de calculateurs biologiques qui s'appuie sur la science de la base CIQUAL.",
+                footer_legals: "Mentions Légales",
+                footer_rights: "© 2026 OleaDiet. Tous droits réservés. Données issues de la base publique CIQUAL.",
+                footer_handcrafted: "Développé avec soin pour la santé universelle."
+            },
+            es: {
+                doc_title: "OleaDiet — Nutrición Científica y Calculadoras Biológicas",
+                nav_features: "Características",
+                nav_indices: "Índices Clave",
+                nav_calculators: "Calculadoras",
+                nav_demo: "Demo Interactiva",
+                nav_download: "Descargar",
+                hero_title_1: "Tu salud biológica,",
+                hero_title_2: "optimizada por la ciencia",
+                hero_subtitle: "OleaDiet combina el rigor de la base de datos nutricional oficial CIQUAL con calculadoras biológicas avanzadas para ofrecerte una precisión de salud inigualable.",
+                hero_dl_btn: "Descargar Aplicación",
+                hero_demo_btn: "Demo Interactiva",
+                badge_no_approx: "Sin aproximación",
+                badge_5_langs: "Soporte en 5 Idiomas",
+                badge_local_db: "Base de Datos Isar Local",
+                feat_header_title: "Diseñado para la Precisión Biológica",
+                feat_header_sub: "OleaDiet elimina las conjeturas. Descubra un conjunto de herramientas analíticas diseñadas para sus necesidades de salud.",
+                feat_card_1_title: "Búsqueda CIQUAL Oficial",
+                feat_card_1_desc: "Busque entre miles de alimentos y acceda al instante a su composición exacta en vitaminas, minerales y macronutrientes a partir de datos científicos de referencia.",
+                feat_card_2_title: "Compatibilidad de Dietas",
+                feat_card_2_desc: "Tu perfil configura filtros estrictos. La aplicación calcula puntuaciones de compatibilidad para dietas Cetogénica (Keto), Mediterránea, Low-FODMAP y Cardiovascular.",
+                feat_card_3_title: "6 Categorías de Calculadoras",
+                feat_card_3_desc: "Ya sea que desee optimizar sus electrolitos, calcular su TDEE, relación sodio-potasio o índice PRAL ácido-base renal, OleaDiet proporciona herramientas biológicas completas.",
+                indices_header_title: "Marcadores de Salud Esenciales",
+                indices_header_sub: "Cada alimento contiene datos más complejos que las simples calorías. OleaDiet extrae y califica marcadores clave para informar sus elecciones dietéticas.",
+                indices_li_1: "Índice Glucémico (IG) y Carbohidratos Netos",
+                indices_li_2: "Clasificación NOVA (Nivel de transformación industrial)",
+                indices_li_3: "Índice PRAL (Carga ácido-base renal)",
+                indices_li_4: "Densidad Calórica (Kcal/g)",
+                card_gi_title: "Índice Glucémico",
+                card_gi_desc: "Determine con qué rapidez los carbohidratos elevan los niveles de glucosa en sangre.",
+                card_gi_pill: "Bajo (≤ 55)",
+                card_nova_title: "Grupo NOVA",
+                card_nova_desc: "Mida el grado de procesamiento industrial de los ingredientes.",
+                card_nova_pill: "NOVA 1 (No procesado)",
+                card_pral_title: "Índice PRAL",
+                card_pral_desc: "Estime la carga ácida o alcalina de un alimento en su sistema renal.",
+                card_pral_pill: "Alcalino (Puntuación < 0)",
+                card_cd_title: "Densidad Calórica",
+                card_cd_desc: "Relación calorías/peso. Favorece bajas densidades para la saciedad.",
+                card_cd_pill: "Alta (≥ 4.0 kcal/g)",
+                calc_header_title: "Tus Herramientas de Biología Clínica y Metabólica",
+                calc_header_sub: "OleaDiet integra más de 30 calculadoras específicas en los principales ámbitos de la salud funcional.",
+                calc_cat_1_title: "Keto y Nutrición",
+                calc_cat_1_desc: "Macros cetogénicas precisas, proporciones de grasa y umbrales personalizados de carbohidratos netos.",
+                calc_cat_2_title: "Metabolismo y Peso",
+                calc_cat_2_desc: "Cálculos de tasa metabólica basal (BMR), gasto energético diario total (TDEE) y déficit optimizado.",
+                calc_cat_3_title: "Cardio y Longevidad",
+                calc_cat_3_desc: "Índice aterogénico, relación triglicéridos/HDL y estimación del riesgo cardiovascular global.",
+                calc_cat_4_title: "Rendimiento Deportivo",
+                calc_cat_4_desc: "Ingesta de carbohidratos peri-entrenamiento, carga de entrenamiento y objetivos de VO2 Max.",
+                calc_cat_5_title: "Micronutrición",
+                calc_cat_5_desc: "Ajustes personalizados de las ingestas diarias recomendadas de minerales (Magnesio, Sodio, Potasio).",
+                calc_cat_6_title: "Bienestar y Détox",
+                calc_cat_6_desc: "Evaluación de las puntuaciones PRAL acumuladas de las comidas y análisis de hidratación celular.",
+                demo_header_title: "Estime sus necesidades Keto en tiempo real",
+                demo_header_sub: "Pruebe directamente nuestro motor de cálculo biológico. Ajuste los parámetros para calcular su metabolismo y macros objetivos.",
+                demo_bullet_1: "Algoritmos preintegrados que coinciden con las fórmulas reales de Katch-McArdle y TDEE.",
+                lbl_weight: "Peso:",
+                lbl_body_fat: "Grasa Corporal Estimada:",
+                lbl_activity: "Nivel de Actividad",
+                lbl_goal: "Objetivo",
+                opt_sedentary: "Sedentario (Trabajo de oficina, poco ejercicio)",
+                opt_light: "Ligeramente Activo (Ejercicio ligero 1-3 veces/semana)",
+                opt_moderate: "Moderadamente Activo (Ejercicio moderado 3-5 veces/semana)",
+                opt_active: "Muy Activo (Entrenamiento diario intenso)",
+                opt_lose: "Pérdida de grasa moderada (-20%)",
+                opt_maintain: "Mantenimiento metabólico (0%)",
+                opt_gain: "Ganancia de masa muscular limpia (+10%)",
+                res_calories_lbl: "Calorías Objetivo",
+                res_proteins_lbl: "Proteínas",
+                res_fats_lbl: "Grasas (Fats)",
+                res_carbs_lbl: "Carbohidratos Netos",
+                res_unit_day: "g / día",
+                res_unit_max: "g máx / día",
+                res_advice_text: "Consuma al menos el 70% de sus calorías en forma de grasas saludables. Mantenga los carbohidratos netos por debajo del límite diario de 25 g para asegurar la cetosis.",
+                cta_title: "Tome el control de su metabolismo hoy mismo",
+                cta_subtitle: "OleaDiet está disponible de forma gratuita con calculadoras ilimitadas y una base de datos local rápida y segura.",
+                footer_desc: "La aplicación de nutrición clínica, puntuación metabólica y calculadora biológica basada en la ciencia de la base de datos CIQUAL.",
+                footer_legals: "Avisos legales",
+                footer_rights: "© 2026 OleaDiet. Todos los derechos reservados. Datos de la base de datos pública CIQUAL.",
+                footer_handcrafted: "Desarrollado con cuidado para la salud universal."
+            },
+            de: {
+                doc_title: "OleaDiet — Wissenschaftliche Ernährung & Biologische Rechner",
+                nav_features: "Funktionen",
+                nav_indices: "Kennzahlen",
+                nav_calculators: "Rechner",
+                nav_demo: "Interaktive Demo",
+                nav_download: "Herunterladen",
+                hero_title_1: "Ihre biologische Gesundheit,",
+                hero_title_2: "optimiert durch Wissenschaft",
+                hero_subtitle: "OleaDiet kombiniert die Genauigkeit der offiziellen CIQUAL-Ernährungsdatenbank mit fortschrittlichen biologischen Rechnern, um Ihnen eine unvergleichliche Präzision zu bieten.",
+                hero_dl_btn: "App Herunterladen",
+                hero_demo_btn: "Interaktive Demo",
+                badge_no_approx: "Keine Annäherungen",
+                badge_5_langs: "5 Sprachen Unterstützt",
+                badge_local_db: "Lokale Isar-Datenbank",
+                feat_header_title: "Entwickelt für biologische Präzision",
+                feat_header_sub: "OleaDiet eliminiert Rätselraten. Entdecken Sie eine Reihe von Analysewerkzeugen, die auf Ihre gesundheitlichen Anforderungen zugeschnitten sind.",
+                feat_card_1_title: "Offizielle CIQUAL-Suche",
+                feat_card_1_desc: "Suchen Sie in Tausenden von Lebensmitteln und greifen Sie sofort auf deren genaue Zusammensetzung an Vitaminen, Mineralien und Makronährstoffen aus wissenschaftlichen Referenzdaten zu.",
+                feat_card_2_title: "Diätkompatibilität",
+                feat_card_2_desc: "Ihr Profil konfiguriert strenge Filter. Die App berechnet Kompatibilitätswerte für ketogene (Keto), mediterrane, Low-FODMAP- und kardiovaskuläre Diäten.",
+                feat_card_3_title: "6 Rechnerkategorien",
+                feat_card_3_desc: "Egal, ob Sie Ihre Elektrolyte optimieren, Ihren TDEE, das Natrium-Kalium-Verhältnis oder den renalen PRAL-Säure-Basen-Wert berechnen möchten, OleaDiet bietet umfassende biologische Werkzeuge.",
+                indices_header_title: "Wichtige Gesundheitsmarker",
+                indices_header_sub: "Jedes Lebensmittel enthält komplexere Daten als einfache Kalorien. OleaDiet extrahiert und qualifiziert Schlüsselmarker, um Ihre Ernährungsentscheidungen zu unterstützen.",
+                indices_li_1: "Glykämischer Index (GI) & Nettokohlenhydrate",
+                indices_li_2: "NOVA-Klassifizierung (Grad der industriellen Verarbeitung)",
+                indices_li_3: "PRAL-Index (Renale Säure-Basen-Belastung)",
+                indices_li_4: "Kaloriendichte (Kcal/g)",
+                card_gi_title: "Glykämischer Index",
+                card_gi_desc: "Bestimmen Sie, wie schnell Kohlenhydrate den Blutzuckerspiegel ansteigen lassen.",
+                card_gi_pill: "Niedrig (≤ 55)",
+                card_nova_title: "NOVA-Gruppe",
+                card_nova_desc: "Messen Sie den Grad der industriellen Verarbeitung von Inhaltsstoffen.",
+                card_nova_pill: "NOVA 1 (Unverarbeitet)",
+                card_pral_title: "PRAL-Index",
+                card_pral_desc: "Schätzen Sie die Säure- oder Basenbelastung eines Lebensmittels auf Ihr Nierensystem ab.",
+                card_pral_pill: "Alkalisch (Wert < 0)",
+                card_cd_title: "Kaloriendichte",
+                card_cd_desc: "Verhältnis von Kalorien zu Gewicht. Bevorzugen Sie niedrige Dichten für die Sättigung.",
+                card_cd_pill: "Hoch (≥ 4.0 kcal/g)",
+                calc_header_title: "Ihre Werkzeuge für klinische und metabolische Biologie",
+                calc_header_sub: "OleaDiet integriert über 30 spezifische Rechner in den wichtigsten funktionellen Gesundheitsbereichen.",
+                calc_cat_1_title: "Keto & Ernährung",
+                calc_cat_1_desc: "Präzise ketogene Makros, Fettverhältnisse und individuelle Grenzwerte für Nettokohlenhydrate.",
+                calc_cat_2_title: "Stoffwechsel & Gewicht",
+                calc_cat_2_desc: "Berechnungen des Grundumsatzes (BMR), des Gesamtenergieumsatzes (TDEE) und optimierter Defizite.",
+                calc_cat_3_title: "Cardio & Langlebigkeit",
+                calc_cat_3_desc: "Atherogener Index, Triglycerid/HDL-Verhältnis und globale Schätzung des kardiovaskulären Risikos.",
+                calc_cat_4_title: "Sportliche Leistung",
+                calc_cat_4_desc: "Kohlenhydrataufnahme rund um das Training, Trainingsbelastung und VO2-Max-Ziele.",
+                calc_cat_5_title: "Mikronährstoffe",
+                calc_cat_5_desc: "Personalisierte Anpassung der empfohlenen Tagesdosis für Mineralstoffe (Magnesium, Natrium, Kalium).",
+                calc_cat_6_title: "Wellness & Entgiftung",
+                calc_cat_6_desc: "Bewertung der kumulativen PRAL-Werte von Mahlzeiten und Analyse der zellulären Hydratation.",
+                demo_header_title: "Schätzen Sie Ihren Keto-Bedarf in Echtzeit",
+                demo_header_sub: "Testen Sie direkt unseren biologischen Berechnungsrechner. Passen Sie die Einstellungen an, um Ihren Stoffwechsel und Ihre Zielmakros zu schätzen.",
+                demo_bullet_1: "Vorintegrierte Algorithmen, die den tatsächlichen Katch-McArdle- und TDEE-Formeln entsprechen.",
+                lbl_weight: "Gewicht:",
+                lbl_body_fat: "Geschätzter Körperfettanteil:",
+                lbl_activity: "Aktivitätsniveau",
+                lbl_goal: "Ziel",
+                opt_sedentary: "Sitzend (Bürojob, wenig Bewegung)",
+                opt_light: "Leicht Aktiv (Leichte Bewegung 1-3 Mal/Woche)",
+                opt_moderate: "Mäßig Aktiv (Mäßige Bewegung 3-5 Mal/Woche)",
+                opt_active: "Sehr Aktiv (Intensives tägliches Training)",
+                opt_lose: "Moderater Fettabbau (-20%)",
+                opt_maintain: "Metabolische Erhaltung (0%)",
+                opt_gain: "Sauberer Muskelaufbau (+10%)",
+                res_calories_lbl: "Zielkalorien",
+                res_proteins_lbl: "Proteine",
+                res_fats_lbl: "Fette (Fats)",
+                res_carbs_lbl: "Nettokohlenhydrate",
+                res_unit_day: "g / Tag",
+                res_unit_max: "g max / Tag",
+                res_advice_text: "Beziehen Sie mindestens 70 % Ihrer Kalorien aus gesunden Fetten. Halten Sie Nettokohlenhydrate unter dem täglichen Limit von 25 g, um die Ketose zu sichern.",
+                cta_title: "Übernehmen Sie noch heute die Kontrolle über Ihren Stoffwechsel",
+                cta_subtitle: "OleaDiet ist kostenlos mit unbegrenzten Rechnern und einer schnellen, sicheren lokalen Datenbank verfügbar.",
+                footer_desc: "Die App für klinische Ernährung, Stoffwechselbewertung und biologische Rechner, die auf den wissenschaftlichen Erkenntnissen der CIQUAL-Datenbank basiert.",
+                footer_legals: "Rechtliche Hinweise",
+                footer_rights: "© 2026 OleaDiet. Alle Rechte vorbehalten. Daten aus der öffentlichen CIQUAL-Datenbank.",
+                footer_handcrafted: "Mit Sorgfalt entwickelt für die universelle Gesundheit."
+            },
+            ar_std: {
+                doc_title: "OleaDiet — التغذية العلمية والحاسبات الحيوية",
+                nav_features: "الميزات",
+                nav_indices: "المؤشرات الرئيسية",
+                nav_calculators: "الحاسبات",
+                nav_demo: "عرض تفاعلي",
+                nav_download: "تحميل",
+                hero_title_1: "صحتك البيولوجية،",
+                hero_title_2: "محسنة وموجهة بالعلوم",
+                hero_subtitle: "يجمع OleaDiet بين دقة قاعدة بيانات التغذية الرسمية CIQUAL والحاسبات الحيوية المتقدمة ليوفر لك دقة صحية لا مثيل لها.",
+                hero_dl_btn: "تحميل التطبيق",
+                hero_demo_btn: "عرض تفاعلي",
+                badge_no_approx: "بدون تقريب أو تخمين",
+                badge_5_langs: "يدعم 5 لغات",
+                badge_local_db: "قاعدة بيانات Isar محلية",
+                feat_header_title: "مصمم للدقة البيولوجية",
+                feat_header_sub: "يزيل OleaDiet التخمين. اكتشف مجموعة من الأدوات التحليلية المصممة لمتطلباتك الصحية.",
+                feat_card_1_title: "البحث الرسمي في قاعدة CIQUAL",
+                feat_card_1_desc: "ابحث في آلاف الأطعمة واطلع فوراً على تركيبتها الدقيقة من الفيتامينات والمعادن والمغذيات الكبرى من البيانات العلمية المرجعية.",
+                feat_card_2_title: "ملاءمة الحميات الغذائية",
+                feat_card_2_desc: "يقوم ملفك الشخصي بتكوين فلاتر صارمة. يحسب التطبيق درجات التوافق لحميات الكيتو، وحمية البحر المتوسط، وLow-FODMAP، وحمية القلب والأوعية الدموية.",
+                feat_card_3_title: "6 فئات من الحاسبات",
+                feat_card_3_desc: "سواء كنت ترغب في تحسين الكهارل، أو حساب معدل الأيض اليومي TDEE، أو نسبة الصوديوم والبوتاسيوم، أو مؤشر PRAL الكلوي، فإن OleaDiet يوفر أدوات بيولوجية متكاملة.",
+                indices_header_title: "المؤشرات الصحية الأساسية",
+                indices_header_sub: "يحتوي كل طعام على بيانات أكثر تعقيدًا من مجرد السعرات الحرارية. يقوم OleaDiet باستخراج وتصنيف المؤشرات الرئيسية لتوجيه خياراتك الغذائية.",
+                indices_li_1: "المؤشر الجلايسيمي والكربوهيدرات الصافية",
+                indices_li_2: "تصنيف NOVA (مستوى التصنيع الصناعي للأغذية)",
+                indices_li_3: "مؤشر PRAL (الحمل الحمضي القلوي الكلوي)",
+                indices_li_4: "الكثافة الحرارية (كيلو سعر/غرام)",
+                card_gi_title: "المؤشر الجلايسيمي",
+                card_gi_desc: "تحديد مدى سرعة الكربوهيدرات في رفع مستويات السكر في الدم.",
+                card_gi_pill: "منخفض (≤ 55)",
+                card_nova_title: "مجموعة NOVA",
+                card_nova_desc: "قياس درجة المعالجة الصناعية للمكونات والأغذية.",
+                card_nova_pill: "NOVA 1 (غير مصنع)",
+                card_pral_title: "مؤشر PRAL",
+                card_pral_desc: "تقدير الحمل الحمضي أو القلوي للغذاء على النظام الكلوي.",
+                card_pral_pill: "قلوي (النتيجة < 0)",
+                card_cd_title: "الكثافة الحرارية",
+                card_cd_desc: "نسبة السعرات الحرارية إلى الوزن. يفضل الكثافات المنخفضة للشعور بالشبع.",
+                card_cd_pill: "مرتفعة (≥ 4.0 كيلو سعر/غرام)",
+                calc_header_title: "أدواتك للبيولوجيا السريرية والتمثيل الغذائي",
+                calc_header_sub: "يضم OleaDiet أكثر من 30 حاسبة متخصصة موزعة على المجالات الصحية والوظيفية الكبرى.",
+                calc_cat_1_title: "الكيتو والتغذية",
+                calc_cat_1_desc: "حساب دقيق للمغذيات الكبرى للكيتو، نسب الدهون، وحدود الكربوهيدرات الصافية.",
+                calc_cat_2_title: "التمثيل الغذائي والوزن",
+                calc_cat_2_desc: "حسابات معدل الأيض الأساسي (BMR)، إجمالي الطاقة اليومية (TDEE)، والعجز الأمثل للوزن.",
+                calc_cat_3_title: "القلب وطول العمر",
+                calc_cat_3_desc: "مؤشر تصلب الشرايين، نسبة الدهون الثلاثية إلى الكوليسترول النافع، وتقدير مخاطر القلب والأوعية الدموية.",
+                calc_cat_4_title: "الأداء الرياضي",
+                calc_cat_4_desc: "حساب تناول الكربوهيدرات أثناء التدريب، حمل التمرين، وأهداف VO2 Max للياقة.",
+                calc_cat_5_title: "التغذية الدقيقة",
+                calc_cat_5_desc: "تعديلات مخصصة للمآخذ اليومية الموصى بها للمعادن (المغنيسيوم، الصوديوم، البوتاسيوم).",
+                calc_cat_6_title: "العافية والسموم",
+                calc_cat_6_desc: "تقييم درجات مؤشر PRAL التراكمي للوجبات وتحليل الترطيب الخلوي.",
+                demo_header_title: "احسب احتياجات الكيتو الخاصة بك في الوقت الفعلي",
+                demo_header_sub: "اختبر محرك الحساب البيولوجي الخاص بنا مباشرة. اضبط الإعدادات لتقدير التمثيل الغذائي والمغذيات المستهدفة.",
+                demo_bullet_1: "خوارزميات مدمجة تطابق معادلات Katch-McArdle وTDEE الحقيقية بالتطبيق.",
+                lbl_weight: "الوزن:",
+                lbl_body_fat: "نسبة الدهون المقدرة:",
+                lbl_activity: "مستوى النشاط",
+                lbl_goal: "الهدف",
+                opt_sedentary: "خامل (عمل مكتبي، تمرين قليل جداً)",
+                opt_light: "نشاط خفيف (تمرين خفيف 1-3 مرات/أسبوع)",
+                opt_moderate: "نشاط متوسط (تمرين متوسط 3-5 مرات/أسبوع)",
+                opt_active: "نشط جداً (تمارين يومية مكثفة)",
+                opt_lose: "خسارة دهون معتدلة (-20%)",
+                opt_maintain: "المحافظة على الأيض (0%)",
+                opt_gain: "زيادة كتلة عضلية صافية (+10%)",
+                res_calories_lbl: "السعرات المستهدفة",
+                res_proteins_lbl: "البروتينات",
+                res_fats_lbl: "الدهون",
+                res_carbs_lbl: "الكربوهيدرات الصافية",
+                res_unit_day: "غرام / يوم",
+                res_unit_max: "غرام كحد أقصى / يوم",
+                res_advice_text: "احصل على 70% على الأقل من السعرات من الدهون الصحية. حافظ على الكربوهيدرات الصافية دون 25غ يومياً للبقاء في الكيتوزية.",
+                cta_title: "سيطر على تمثيلك الغذائي اليوم",
+                cta_subtitle: "تطبيق OleaDiet متاح مجانًا مع حاسبات غير محدودة وقاعدة بيانات محلية سريعة وآمنة.",
+                footer_desc: "تطبيق التغذية السريرية، التقييم الأيضي، والحاسبات البيولوجية القائم على البيانات العلمية لقاعدة بيانات CIQUAL.",
+                footer_legals: "المعلومات القانونية",
+                footer_rights: "© 2026 OleaDiet. جميع الحقوق محفوظة. البيانات مستمدة من قاعدة بيانات CIQUAL العامة.",
+                footer_handcrafted: "تم تطويره بكل عناية من أجل الصحة العامة."
+            }
+        };
+
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Language State Management
+        let currentLang = 'en'; // Default language is English
+
+        function setLanguage(lang) {
+            if (!i18nData[lang]) return;
+            currentLang = lang;
+            
+            // Save to localStorage
+            localStorage.setItem('oleadiet_lang', lang);
+            
+            // Set dropdown value
+            document.getElementById('lang-select').value = lang;
+
+            // Set HTML lang attribute and text direction for RTL support (Arabic)
+            document.documentElement.lang = lang;
+            if (lang === 'ar_std') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+
+            // Translate elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nData[lang][key]) {
+                    el.textContent = i18nData[lang][key];
+                }
+            });
+
+            // Re-calculate widget outputs to update labels and advice texts dynamically
+            calculateMacros();
+        }
+
+        // Dropdown Event Listener
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        // Detect Preferred Language on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Priority: URL hash -> localStorage -> browser language -> default 'en'
+            let initialLang = 'en';
+            const hash = window.location.hash.substring(1);
+            
+            if (i18nData[hash]) {
+                initialLang = hash;
+            } else {
+                const saved = localStorage.getItem('oleadiet_lang');
+                if (saved && i18nData[saved]) {
+                    initialLang = saved;
+                } else {
+                    const browserLang = navigator.language.split('-')[0];
+                    if (i18nData[browserLang]) {
+                        initialLang = browserLang;
+                    }
+                }
+            }
+            setLanguage(initialLang);
+        });
 
         // Header scroll behavior
         window.addEventListener('scroll', function() {
@@ -1199,9 +1748,6 @@
         bfInput.addEventListener('input', calculateMacros);
         activityInput.addEventListener('change', calculateMacros);
         goalInput.addEventListener('change', calculateMacros);
-
-        // Initial Calculation
-        calculateMacros();
     </script>
 </body>
 </html>
